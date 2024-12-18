@@ -1,0 +1,14 @@
+../Core/Src/main.c:144:14:MAX7219_SendData	24	static
+../Core/Src/main.c:113:5:main	48	static
+../Core/Src/main.c:154:14:DisplayCharacter	32	static
+../Core/Src/main.c:162:12:MAX72_Init_F	24	static
+../Core/Src/main.c:278:6:SystemClock_Config	120	static
+../Core/Src/main.c:339:13:MX_I2C1_Init	8	static
+../Core/Src/main.c:387:13:MX_SPI1_Init	8	static
+../Core/Src/main.c:435:13:MX_USART3_UART_Init	8	static
+../Core/Src/main.c:483:13:MX_USB_OTG_FS_PCD_Init	8	static
+../Core/Src/main.c:519:13:MX_GPIO_Init	56	static
+../Core/Src/main.c:617:9:PCF8591_ReadAnalog	40	static
+../Core/Src/main.c:648:6:set_dac	40	static
+../Core/Src/main.c:672:6:HAL_UART_RxCpltCallback	16	static
+../Core/Src/main.c:688:6:Error_Handler	4	static,ignoring_inline_asm

@@ -185,6 +185,10 @@ int main(void)
   	  //Receive_IT inicial para permitir que a placa receba um
   	  HAL_UART_Receive_IT(&huart3, rxBuffer, 12);
 
+  	  for(){
+
+  	  }
+
 
   /* USER CODE END 2 */
 
@@ -192,78 +196,7 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-	  	  HAL_Delay(100);
-	  	  strncpy(stringBuffer, rxBuffer, 12);
 
-
-	  	  //Func para checar o valor no sensor de canal 0
-	  	  if(strncmp(stringBuffer,"Read_AIN0",9) == 0){
-	  		  LDR = PCF8591_ReadAnalog(0);
-	  		  HAL_Delay(100);
-
-	  	  }
-
-	  	//Func para pegar o valor de voltagem e exibir qual o simbolo represent esse valor e se é maior ou menor que 128
-	  	  if(strncmp(stringBuffer,"LDR",3) == 0){
-	  		DisplayCharacter(' ' +2);
-	  		HAL_Delay(500);
-	  		if(LDR<128){
-	  			DisplayCharacter(' ' +3);
-	  		    HAL_Delay(400);
-	  		}else{
-	  			DisplayCharacter(' ' +4);
-	  			HAL_Delay(400);
-	  		}
-	  	  }
-
-
-	  	  //Func para checar o valor no sensor de canal 1
-	  	  if(strncmp(stringBuffer,"Read_AIN1",9) == 0){
-	  		  Temp = PCF8591_ReadAnalog(1);
-	  		  HAL_Delay(100);
-	  	  }
-
-	  	//Func para pegar o valor de voltagem e exibir qual o simbolo represent esse valor e se é maior ou menor que 128
-	  	  if(strncmp(stringBuffer,"Temp",4) == 0){
-		  		DisplayCharacter(' ' +1);
-		  		HAL_Delay(500);
-		  		if(LDR<128){
-		  			DisplayCharacter(' ' +3);
-		  		    HAL_Delay(400);
-		  		}else{
-		  			DisplayCharacter(' ' +4);
-		  			HAL_Delay(400);
-		  		}
-
-	  	  }
-
-	  	  //Func para checar o valor no sensor de canal 3
-	  	  if(strncmp(stringBuffer,"Read_AIN3",9) == 0){
-	  		  Pot = PCF8591_ReadAnalog(3);
-	  		  HAL_Delay(100);
-	  	  }
-
-	  	  //Func para pegar o valor de voltagem e exibir qual o simbolo represent esse valor e se é maior ou menor que 128
-	  	  if(strncmp(stringBuffer,"Volt",4) == 0){
-		  		DisplayCharacter(' ');
-		  		HAL_Delay(500);
-		  		if(LDR<128){
-		  			DisplayCharacter(' ' +3);
-		  		    HAL_Delay(400);
-		  		}else{
-		  			DisplayCharacter(' ' +4);
-		  			HAL_Delay(400);
-		  		}
-	  	  }
-
-
-	  	  if(strncmp(stringBuffer,"Set_DAC_",8)==0){
-	  		  uint8_t value = (uint8_t)atoi((char*)&stringBuffer[8]);
-	  		  set_dac(value);
-	  	  }
-
-	  	huart3.pRxBuffPtr = rxBuffer;
-	    huart3.RxXferCount = 0;
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */

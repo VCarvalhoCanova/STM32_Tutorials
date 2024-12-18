@@ -1,0 +1,2 @@
+../Core/Src/MAX7219.c:68:6:MAX72_Init_F	16	static
+../Core/Src/MAX7219.c:85:6:Print_Alphabet	16	static
