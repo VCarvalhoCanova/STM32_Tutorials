@@ -94,9 +94,6 @@ const uint8_t Init_Commands[5][2]={
 
 uint8_t shutDown[2];
 uint8_t PCF8591_ReadAnalog(uint8_t channel);
-uint8_t LDR;
-uint8_t Temp;
-uint8_t Pot;
 uint8_t rxBuffer[12];
 char stringBuffer[12];
 /* USER CODE END PFP */
@@ -185,9 +182,7 @@ int main(void)
   	  //Receive_IT inicial para permitir que a placa receba um
   	  HAL_UART_Receive_IT(&huart3, rxBuffer, 12);
 
-  	  for(){
 
-  	  }
 
 
   /* USER CODE END 2 */
@@ -197,6 +192,54 @@ int main(void)
   while (1)
   {
 
+	  HAL_Delay(1000);
+	  strncpy(stringBuffer, rxBuffer, 12);
+
+	  //Func para pegar o valor de voltagem e exibir qual o simbolo represent esse valor e se é maior ou menor que 128
+	  if(strcmp(stringBuffer, "Temp", 4) == 0){
+		  uint8_t Temp= PCF8591_ReadAnalog(1);
+		  DisplayCharacter(' ' +1);
+	      HAL_Delay(500);
+	      if(Temp<128){
+	          DisplayCharacter(' ' +3);
+	          HAL_Delay(400);
+	      }else{
+	          DisplayCharacter(' ' +4);
+	          HAL_Delay(400);
+	      }
+
+
+	  }if(strcmp(stringBuffer, "Volt", 4) == 0){
+		  uint8_t Volt= PCF8591_ReadAnalog(3);
+		  DisplayCharacter(' ' +0);
+		  HAL_Delay(500);
+	      if(Volt<128){
+	        DisplayCharacter(' ' +3);
+	        HAL_Delay(400);
+	      }else{
+		    DisplayCharacter(' ' +4);
+	        HAL_Delay(400);
+		  }
+
+
+	  }if(strcmp(stringBuffer, "LDR", 4) == 0){
+			uint8_t LDR= PCF8591_ReadAnalog(3);
+	  		DisplayCharacter(' ' +2);
+		    HAL_Delay(500);
+		    if(LDR<128){
+		        DisplayCharacter(' ' +3);
+		        HAL_Delay(400);
+		     }else{
+		        DisplayCharacter(' ' +4);
+		        HAL_Delay(400);
+		     }
+	  }
+
+	  if(strncmp(stringBuffer,"Set_DAC_",8)==0){
+		  uint8_t value = (uint8_t)atoi((char*)&stringBuffer[8]);
+		  set_dac(value);
+
+	  }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -574,7 +617,7 @@ uint8_t PCF8591_ReadAnalog(uint8_t channel){
    huart3.RxXferCount = 0; //
    memset(stringBuffer, 0, 12);
    HAL_UART_Receive_IT(&huart3, rxBuffer, 12);
-	return analog_data[1];
+   return analog_data[1];
 
 }
 
